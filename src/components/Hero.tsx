@@ -1,14 +1,13 @@
 import { useDebouncedState } from '@mantine/hooks'
 import Search from './Search'
 import weather from './weather.json'
-import { ChangeEvent } from 'react'
 
 export default function Hero() {
   console.log(JSON.stringify(weather, null, 4))
-  const [query, setQuery] = useDebouncedState('', 500)
+  const [search, setSearch] = useDebouncedState('', 500)
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.currentTarget.value)
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.currentTarget.value)
   }
 
   // include these
@@ -30,7 +29,7 @@ export default function Hero() {
   // },
   return (
     <>
-      <Search query={query} onChange={handleInputChange} />
+      <Search query={search} onChange={handleChange} />
       <pre>{JSON.stringify(weather, null, 4)}</pre>
       <div>Test</div>
     </>
