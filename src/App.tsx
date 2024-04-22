@@ -9,7 +9,7 @@ export default function App() {
     <MantineProvider theme={theme}>
       <Navbar />
       <main>
-        <Container pt={60} size="md" bg="cyan">
+        <Container pt={90} size="md" bg="cyan">
           <Hero />
         </Container>
       </main>
