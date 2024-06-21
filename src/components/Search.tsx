@@ -1,27 +1,31 @@
-import { Text, TextInput } from '@mantine/core'
+import { Loader, TextInput } from '@mantine/core'
 import { IconSearch } from '@tabler/icons-react'
+import React from 'react'
 
-export default function Search(params: {
+interface WeatherSearchProps {
   query: string
-  onChange: React.ChangeEventHandler<HTMLInputElement>
-}) {
+  onQueryChange: React.ChangeEventHandler<HTMLInputElement>
+  isLoading: boolean
+}
+
+export default function Search({
+  query,
+  onQueryChange,
+  isLoading,
+}: WeatherSearchProps): JSX.Element {
   const icon = <IconSearch />
 
   return (
-    <>
-      <TextInput
-        leftSectionPointerEvents="none"
-        leftSection={icon}
-        defaultValue={params.query}
-        onChange={params.onChange}
-        variant="filled"
-        size="lg"
-        label="Search for a name."
-        radius="md"
-        placeholder="Enter name of town, city or Country"
-      />
-
-      <Text>Debounced value: {params.query}</Text>
-    </>
+    <TextInput
+      leftSectionPointerEvents="none"
+      leftSection={icon}
+      defaultValue={query}
+      onChange={onQueryChange}
+      variant="filled"
+      size="lg"
+      radius="md"
+      placeholder="Enter name of town or city"
+      rightSection={isLoading && <Loader size={24} />}
+    />
   )
 }
