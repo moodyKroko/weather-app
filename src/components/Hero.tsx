@@ -70,9 +70,9 @@ export default function Hero(): JSX.Element {
         />
 
         {/* TODO: export to WeatherList component */}
-        <Table highlightOnHover highlightOnHoverColor='gray' horizontalSpacing="xl">
+        <Table highlightOnHover horizontalSpacing="xl">
           <Table.Thead>
-            <Table.Tr bg="orange">
+            <Table.Tr>
               <Table.Th>Name</Table.Th>
               <Table.Th>Country</Table.Th>
               <Table.Th>State</Table.Th>
