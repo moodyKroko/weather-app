@@ -21,6 +21,7 @@ export default function Hero(): JSX.Element {
     async (query: string): Promise<void> => {
       if (query === '' || query.trim().length <= 0) {
         setSearchResults([])
+        setWeatherResult('')
       }
 
       if (query.length != 0) {
