@@ -1,4 +1,4 @@
-import { Container, Stack, Table } from '@mantine/core'
+import { Stack, Table } from '@mantine/core'
 import { useDebouncedCallback, useDebouncedState } from '@mantine/hooks'
 import { useState } from 'react'
 
@@ -8,6 +8,7 @@ import Search from './Search'
 
 import codes from './codes.json'
 import { GetFlag } from './GetFlag'
+import WeatherCard from './WeatherCard'
 
 export default function Hero(): JSX.Element {
   const [search, setSearch] = useDebouncedState('', 500)
@@ -16,12 +17,14 @@ export default function Hero(): JSX.Element {
   const [weatherResult, setWeatherResult] = useState('')
 
   const [countryNames] = useState<CountryCodes>(codes.codes)
+  const [queryClicked, setQueryClicked] = useState(false)
 
   const handleSearch = useDebouncedCallback(
     async (query: string): Promise<void> => {
       if (query === '' || query.trim().length <= 0) {
         setSearchResults([])
         setWeatherResult('')
+        setQueryClicked(false)
       }
 
       if (query.length != 0) {
@@ -44,6 +47,7 @@ export default function Hero(): JSX.Element {
     console.log('latitude:', result.lat, 'longitude:', result.lon)
     console.log('Query result clicked:', result.name)
     setWeatherResult(result.name)
+    setQueryClicked(true)
   }
 
   const rows = searchResults.map((result, index) => {
@@ -83,8 +87,7 @@ export default function Hero(): JSX.Element {
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
 
-        {/* TODO: This is a another component that shows the weather result */}
-        <p>{weatherResult}</p>
+        {queryClicked && <WeatherCard weatherResult={weatherResult} />}
         <br />
       </Stack>
     </>
