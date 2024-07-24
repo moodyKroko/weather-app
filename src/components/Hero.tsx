@@ -1,30 +1,77 @@
-import { Stack, Table } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import { useDebouncedCallback, useDebouncedState } from '@mantine/hooks'
 import { useState } from 'react'
 
-import { getSearchResults } from '../services/getServices'
-import { CountryCodes, SearchResults } from '../types'
+import { getSearchResults, getWeather } from '../services/getServices'
+import { SearchResults, WeatherResult } from '../types'
 import Search from './Search'
 
-import codes from './codes.json'
-import { GetFlag } from './GetFlag'
 import WeatherCard from './WeatherCard'
+import WeatherList from './WeatherList'
 
 export default function Hero(): JSX.Element {
   const [search, setSearch] = useDebouncedState('', 500)
   const [loading, setLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<SearchResults[]>([])
-  const [weatherResult, setWeatherResult] = useState('')
 
-  const [countryNames] = useState<CountryCodes>(codes.codes)
-  const [queryClicked, setQueryClicked] = useState(false)
+  const [isQueryClicked, setIsQueryClicked] = useState(false)
+  const [clickedQuery, setClickedQuery] = useState<WeatherResult[]>([
+    {
+      coord: {
+        lon: 0,
+        lat: 0,
+      },
+      weather: [
+        {
+          id: 0,
+          main: '',
+          description: '',
+          icon: '',
+        },
+      ],
+      base: '',
+      main: {
+        temp: 0,
+        feels_like: 0,
+        temp_min: 0,
+        temp_max: 0,
+        pressure: 0,
+        humidity: 0,
+        sea_level: 0,
+        grnd_level: 0,
+      },
+      visibility: 0,
+      wind: {
+        speed: 0,
+        deg: 0,
+        gust: 0,
+      },
+      rain: {
+        '1h': 0,
+      },
+      clouds: {
+        all: 0,
+      },
+      dt: 0,
+      sys: {
+        type: 0,
+        id: 0,
+        country: '',
+        sunrise: 0,
+        sunset: 0,
+      },
+      timezone: 0,
+      id: 0,
+      name: '',
+      cod: 0,
+    },
+  ])
 
-  const handleSearch = useDebouncedCallback(
+  const handleSearchInput = useDebouncedCallback(
     async (query: string): Promise<void> => {
       if (query === '' || query.trim().length <= 0) {
         setSearchResults([])
-        setWeatherResult('')
-        setQueryClicked(false)
+        setIsQueryClicked(false)
       }
 
       if (query.length != 0) {
@@ -38,32 +85,13 @@ export default function Hero(): JSX.Element {
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value)
-    handleSearch(event.currentTarget.value)
+    handleSearchInput(event.currentTarget.value)
   }
 
-  // TODO: when clicked do a get request to get the weather data
-  // from given latitude and longitude
   const handleTableRowClick = (result: SearchResults) => {
-    console.log('latitude:', result.lat, 'longitude:', result.lon)
-    console.log('Query result clicked:', result.name)
-    setWeatherResult(result.name)
-    setQueryClicked(true)
+    setIsQueryClicked(true)
+    getWeather(result.lat, result.lon).then(res => setClickedQuery(res))
   }
-
-  const rows = searchResults.map((result, index) => {
-    const countryCode = result.country.toLowerCase()
-
-    return (
-      <Table.Tr key={index} onClick={() => handleTableRowClick(result)}>
-        <Table.Td>{result.name}</Table.Td>
-        <Table.Td>{countryNames[countryCode]}</Table.Td>
-        <Table.Td>{result.state}</Table.Td>
-        <Table.Td>
-          <GetFlag countryName={countryCode} />
-        </Table.Td>
-      </Table.Tr>
-    )
-  })
 
   return (
     <>
@@ -74,20 +102,12 @@ export default function Hero(): JSX.Element {
           isLoading={loading}
         />
 
-        {/* TODO: export to WeatherList component */}
-        <Table highlightOnHover horizontalSpacing="xl">
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th>Name</Table.Th>
-              <Table.Th>Country</Table.Th>
-              <Table.Th>State</Table.Th>
-              <Table.Th>Flag</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>{rows}</Table.Tbody>
-        </Table>
+        <WeatherList
+          querySearchResult={searchResults}
+          onTableRowClick={handleTableRowClick}
+        />
 
-        {queryClicked && <WeatherCard weatherResult={weatherResult} />}
+        {isQueryClicked && <WeatherCard weather={clickedQuery} />}
         <br />
       </Stack>
     </>
