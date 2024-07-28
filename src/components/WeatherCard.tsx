@@ -2,10 +2,14 @@ import { Flex, Text } from '@mantine/core'
 import { WeatherResult } from '../types'
 
 interface WeatherCardProps {
-  weather: WeatherResult[]
+  weather: WeatherResult[] | undefined
 }
 
 export default function WeatherCard({ weather }: WeatherCardProps) {
+  if (!weather) {
+    return 
+  }
+
   const weatherRes = weather[0]
 
   return (
