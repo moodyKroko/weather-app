@@ -13,7 +13,7 @@ export default function App(): JSX.Element {
       <QueryClientProvider client={queryClient}>
         <Navbar />
         <main>
-          <Container pt={90} size="md">
+          <Container pt={46} size="md">
             <Hero />
           </Container>
         </main>
