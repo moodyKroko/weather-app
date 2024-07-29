@@ -10,7 +10,6 @@ export default function Navbar() {
         className={classes.navbar}
         pos="fixed"
         justify="space-between"
-        bg="orange"
         px="lg"
       >
         <Title order={2}>Weather App</Title>
