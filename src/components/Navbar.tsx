@@ -1,20 +1,15 @@
-import { Group, Title } from '@mantine/core'
+import { Container, Flex, Title } from '@mantine/core'
 import ToggleColorScheme from './ToggleColorScheme'
-
-import classes from './navbar.module.css'
 
 export default function Navbar() {
   return (
     <header>
-      <Group
-        className={classes.navbar}
-        pos="fixed"
-        justify="space-between"
-        px="lg"
-      >
-        <Title order={2}>Weather App</Title>
-        <ToggleColorScheme />
-      </Group>
+      <Container size="md" m="auto" p="xs">
+        <Flex justify="space-between" px="xs">
+          <Title order={2}>Weather App</Title>
+          <ToggleColorScheme />
+        </Flex>
+      </Container>
     </header>
   )
 }
