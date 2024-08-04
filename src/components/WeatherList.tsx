@@ -18,16 +18,13 @@ export default function WeatherList({
   const rows = querySearchResult.map((result, index: number) => {
     const countryCode = result.country.toLowerCase()
 
-    const {
-      name,
-      state,
-    } = result
+    const { name, state } = result
 
     return (
       <Table.Tr key={index} onClick={() => onTableRowClick(result)}>
-        <Table.Td>{result.name}</Table.Td>
+        <Table.Td>{name}</Table.Td>
         <Table.Td>{countryNames[countryCode]}</Table.Td>
-        <Table.Td>{result.state}</Table.Td>
+        <Table.Td>{state}</Table.Td>
         <Table.Td>
           <GetFlag countryName={countryCode} />
         </Table.Td>
@@ -36,7 +33,7 @@ export default function WeatherList({
   })
 
   return (
-    // TODO: Make it responsive to mobile 
+    // TODO: Make it responsive to mobile
     <Table highlightOnHover horizontalSpacing="xl">
       <Table.Thead>
         <Table.Tr>
