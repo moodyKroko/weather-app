@@ -18,6 +18,11 @@ export default function WeatherList({
   const rows = querySearchResult.map((result, index: number) => {
     const countryCode = result.country.toLowerCase()
 
+    const {
+      name,
+      state,
+    } = result
+
     return (
       <Table.Tr key={index} onClick={() => onTableRowClick(result)}>
         <Table.Td>{result.name}</Table.Td>
