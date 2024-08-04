@@ -15,7 +15,7 @@ export default function Hero(): JSX.Element {
   const [searchResults, setSearchResults] = useState<SearchResults[]>([])
 
   const [isQueryClicked, setIsQueryClicked] = useState(false)
-  const [clickedQuery, setClickedQuery] = useState<WeatherResult[]>()
+  const [clickedQuery, setClickedQuery] = useState<WeatherResult>()
 
   const handleSearchInput = useDebouncedCallback(
     async (query: string): Promise<void> => {
