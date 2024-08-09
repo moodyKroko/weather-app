@@ -1,33 +1,68 @@
-import { Flex, Text } from '@mantine/core'
+import { Center, Flex, Grid, Image, Paper, Space, Text } from '@mantine/core'
 import { WeatherResult } from '../types'
 
 interface WeatherCardProps {
-  weather: WeatherResult[] | undefined
+  weather: WeatherResult | undefined
 }
 
 export default function WeatherCard({ weather }: WeatherCardProps) {
-  if (!weather) {
-    return 
+  if (weather === undefined || weather === null) {
+    return null
   }
 
-  const weatherRes = weather[0]
+  console.log('Weather result:', weather)
+
+  const {
+    name,
+    weather: [{ icon, description: iconDescription }],
+    main: { temp, feels_like, humidity, temp_max },
+    wind: { speed },
+    sys: { country },
+  } = weather
+
+  const weatherIcon = `https://openweathermap.org/img/wn/${icon}@4x.png`
 
   return (
-    <Flex
-      direction={{ base: 'column', sm: 'row' }}
-      gap="md"
-      bg={{ base: 'green', sm: 'yellow' }}
-    >
-      <Text>Longitude: {weatherRes.coord.lon}</Text>
-      <Text>Latitude: {weatherRes.coord.lat}</Text>
-      <Text>Weather ID: {weatherRes.weather[0].id}</Text>
-      <Text>Weather description: {weatherRes.weather[0].description}</Text>
-      <Text>Weather icon: {weatherRes.weather[0].icon}</Text>
-      <Text>Weather main: {weatherRes.main.temp}</Text>
-      <Text>Weather main: {weatherRes.main.feels_like}</Text>
-      <Text>Weather main: {weatherRes.main.temp_min}</Text>
-      <Text>Weather main: {weatherRes.main.temp_max}</Text>
-      <Text>Weather main: {weatherRes.main.humidity}</Text>
-    </Flex>
+    <>
+      {/* TODO: Have weather icon */}
+      {/* TODO: Change the temperature to Celcius */}
+      <Grid
+        // justify="space-between"
+        // mx={{ base: 'sm' }}
+        gutter={{ base: 'sm', xs: 'md', md: 'xl', xl: 50 }}
+      >
+        <Grid.Col
+          // bg="cyan"
+          mb={{ base: 'sm' }}
+          span={{ base: 12, md: 12, lg: 4 }}
+        >
+          <Paper shadow="sm" radius="md" p="lg">
+            <Text>{name}</Text>
+            <Center>
+              <Image
+                radius="md"
+                w={150}
+                src={weatherIcon}
+                alt={iconDescription}
+              />
+            </Center>
+          </Paper>
+        </Grid.Col>
+        <Grid.Col
+          // bg="red"
+          mb={{ base: 'sm' }}
+          span={{ base: 12, md: 12, lg: 4 }}
+        >
+          <Paper shadow="sm" radius="md" p="lg">
+            <Text>Temp: {temp}K</Text>
+            <Text>Feels like: {feels_like}K</Text>
+            <Text>Humidity: {humidity}</Text>
+            <Text>Temp max: {temp_max}</Text>
+            <Text>Speed: {speed}</Text>
+            <Text>Country: {country}</Text>
+          </Paper>
+        </Grid.Col>
+      </Grid>
+    </>
   )
 }
