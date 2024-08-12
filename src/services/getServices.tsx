@@ -6,15 +6,15 @@ const BASE_URL = 'https://api.openweathermap.org/'
 const API_KEY = import.meta.env.VITE_API_KEY // import.meta.env.VITE_API_KEY
 
 /** call openWeatherApi & geo search the query string for latitude and longitude
- * @param query - Input string to call geo location API
+ * @param city - Input string to call geo location API
  * @returns An array of `SearchResults`
  */
-const getSearchResults = async (query: string): Promise<SearchResults[]> => {
+const getSearchResults = async (city: string): Promise<SearchResults[]> => {
   const res = await axios.get(
-    `${BASE_URL}/geo/1.0/direct?q=${query}&limit=5&appid=${API_KEY}`
+    `${BASE_URL}/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`
   )
 
-  console.log('Query sent to external API:', query)
+  console.log('Query sent.......Requesting list of cities found.' )
   return res.data
 }
 
@@ -28,7 +28,7 @@ const getWeather = async (lat: number, lon: number): Promise<WeatherResult> => {
     `${BASE_URL}/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
   )
 
-  console.log('Coordinates sent....Requesting weather data.', lat, lon)
+  console.log('Coordinates sent....Requesting weather data.')
   return res.data
 }
 
