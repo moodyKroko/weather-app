@@ -1,49 +1,38 @@
-import { Table } from '@mantine/core'
+import { Skeleton, Table, Text } from '@mantine/core'
 import { useState } from 'react'
 import { CountryCodes, SearchResults } from '../types'
 import { GetFlag } from './GetFlag'
 import codes from './codes.json'
+import { getSearchResults } from '../services/getServices'
+import { useQuery } from '@tanstack/react-query'
 
 interface WeatherListProp {
-  querySearchResult: SearchResults[]
+  searchQuery: string
   onTableRowClick: (queryResult: SearchResults) => void
 }
 
 export default function WeatherList({
-  querySearchResult,
+  searchQuery,
   onTableRowClick,
 }: WeatherListProp) {
   const [countryNames] = useState<CountryCodes>(codes.codes)
 
-  const rows = querySearchResult.map((result, index: number) => {
-    const countryCode = result.country.toLowerCase()
-
-    const { name, state } = result
-
-    return (
-      <Table.Tr key={index} onClick={() => onTableRowClick(result)}>
-        <Table.Td>{name}</Table.Td>
-        <Table.Td>{countryNames[countryCode]}</Table.Td>
-        <Table.Td>{state}</Table.Td>
-        <Table.Td>
-          <GetFlag countryName={countryCode} />
-        </Table.Td>
-      </Table.Tr>
-    )
+  const { isPending, isLoading, data } = useQuery<SearchResults[]>({
+    queryKey: ['searchResults', searchQuery],
+    queryFn: () => getSearchResults(searchQuery),
+    enabled: Boolean(searchQuery),
   })
 
+  console.log('Query loading before undefined check:', isLoading)
+  console.log('Query loading before undefined check:', isPending)
+
+  console.log(data)
+
   return (
-    // TODO: Make it responsive to mobile
-    <Table highlightOnHover horizontalSpacing="xl">
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th>Name</Table.Th>
-          <Table.Th>Country</Table.Th>
-          <Table.Th>State</Table.Th>
-          <Table.Th>Flag</Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
+    <>
+      {/* const countryCode = result.country.toLowerCase() */}
+      {/* const { name, state } = result */}
+      <Text>fasdfs</Text>
+    </>
   )
 }
