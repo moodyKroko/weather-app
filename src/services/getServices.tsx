@@ -10,11 +10,15 @@ const API_KEY = import.meta.env.VITE_API_KEY // import.meta.env.VITE_API_KEY
  * @returns An array of `SearchResults`
  */
 const getSearchResults = async (city: string): Promise<SearchResults[]> => {
+  console.log('Query sent.........Requesting list of cities found.')
+
   const res = await axios.get(
     `${BASE_URL}/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`
   )
 
-  console.log('Query sent.......Requesting list of cities found.' )
+  // simulate .5 second delay
+  await new Promise(resolve => setTimeout(resolve, 500))
+
   return res.data
 }
 
