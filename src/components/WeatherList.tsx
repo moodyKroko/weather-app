@@ -1,4 +1,13 @@
-import { Flex, Skeleton, Text } from '@mantine/core'
+import {
+  Box,
+  Container,
+  Flex,
+  Skeleton,
+  Text,
+  rem,
+  useComputedColorScheme,
+  useMantineColorScheme,
+} from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { getSearchResults } from '../services/getServices'
@@ -7,6 +16,7 @@ import { GetFlag } from './GetFlag'
 import codes from './codes.json'
 
 import styles from './Weatherlist.module.css'
+import { useColorScheme } from '@mantine/hooks'
 
 interface WeatherListProp {
   searchQuery: string
@@ -27,42 +37,55 @@ export default function WeatherList({
 
   const renderSkeletons = () => {
     return Array.from({ length: 5 }).map((_, index) => (
-      <Skeleton key={index} height={50} />
+      <Skeleton key={index} height={50} mt={6} />
     ))
   }
 
+  const { colorScheme } = useMantineColorScheme()
+  const containerColorChange = colorScheme === 'light' ? 'white' : '#1f1f1f'
+  const borderColor = colorScheme === 'light' ? '#e4e6ea' : '#43494c'
+
+  console.log(containerColorChange)
   console.log(data)
 
   return (
-    <>
+    <Container size="md" w={{ base: '100%', sm: rem(750), md: rem(920) }} p="">
       {isLoading ? (
         <>{renderSkeletons()}</>
       ) : (
-        <div>
+        <Box mt="md">
           {data?.map((place, index) => {
             const isState = place.state === undefined
             const country = countryNames[place.country.toLowerCase()]
 
             return (
-              <div key={index} className={styles.roundedEdges}>
+              <Box
+                component="div"
+                key={index}
+                className={styles.roundedEdges}
+                bg={containerColorChange}
+                style={{ borderColor: borderColor }}
+              >
                 <Flex
                   direction={{ base: 'column', sm: 'row' }}
                   justify={{ sm: 'flex-start' }}
                   align={{ base: 'flex-start', sm: 'center' }}
-                  p="md"
+                  p="lg"
                   gap="md"
                   wrap="wrap"
+                    shadow='md'
+                  // bg={containerColorChange}
                 >
                   <Text>{place.name},</Text>
                   {isState ? '' : <Text>{place.state},</Text>}
                   <Text>{country}</Text>
                   <GetFlag countryName={place.country} />
                 </Flex>
-              </div>
+              </Box>
             )
           })}
-        </div>
+        </Box>
       )}
-    </>
+    </Container>
   )
 }
