@@ -2,6 +2,7 @@ import {
   Box,
   Container,
   Flex,
+  Paper,
   Skeleton,
   Text,
   rem,
@@ -43,7 +44,6 @@ export default function WeatherList({
 
   const { colorScheme } = useMantineColorScheme()
   const containerColorChange = colorScheme === 'light' ? 'white' : '#1f1f1f'
-  const borderColor = colorScheme === 'light' ? '#e4e6ea' : '#43494c'
 
   console.log(containerColorChange)
   console.log(data)
@@ -59,12 +59,13 @@ export default function WeatherList({
             const country = countryNames[place.country.toLowerCase()]
 
             return (
-              <Box
-                component="div"
+              <Paper
                 key={index}
-                className={styles.roundedEdges}
-                bg={containerColorChange}
-                style={{ borderColor: borderColor }}
+                className={`${styles.roundedEdges} ${index == 0 ? styles.first : ''} ${index == data.length - 1 ? styles.last : ''}`}
+                shadow="md"
+                radius={0}
+                p="md"
+                withBorder
               >
                 <Flex
                   direction={{ base: 'column', sm: 'row' }}
@@ -73,15 +74,13 @@ export default function WeatherList({
                   p="lg"
                   gap="md"
                   wrap="wrap"
-                    shadow='md'
-                  // bg={containerColorChange}
                 >
                   <Text>{place.name},</Text>
                   {isState ? '' : <Text>{place.state},</Text>}
                   <Text>{country}</Text>
                   <GetFlag countryName={place.country} />
                 </Flex>
-              </Box>
+              </Paper>
             )
           })}
         </Box>
