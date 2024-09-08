@@ -1,12 +1,12 @@
 import {
-    Box,
-    Container,
-    Flex,
-    Paper,
-    Skeleton,
-    Text,
-    rem,
-    useMantineColorScheme,
+  Box,
+  Container,
+  Flex,
+  Paper,
+  Skeleton,
+  Text,
+  rem,
+  useMantineColorScheme,
 } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -59,17 +59,16 @@ export default function WeatherList({
             return (
               <Paper
                 key={index}
-                className={`${styles.roundedEdges} ${index == 0 ? styles.first : ''} ${index == data.length - 1 ? styles.last : ''}`}
                 shadow="md"
                 radius={0}
-                p="md"
+                p="lg"
                 withBorder
+                className={`${styles.roundedEdges} ${index == 0 ? styles.first : ''} ${index == data.length - 1 ? styles.last : ''}`}
               >
                 <Flex
                   direction={{ base: 'column', sm: 'row' }}
                   justify={{ sm: 'flex-start' }}
                   align={{ base: 'flex-start', sm: 'center' }}
-                  p="lg"
                   gap="md"
                   wrap="wrap"
                 >
