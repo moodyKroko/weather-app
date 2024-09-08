@@ -1,13 +1,12 @@
 import {
-  Box,
-  Container,
-  Flex,
-  Paper,
-  Skeleton,
-  Text,
-  rem,
-  useComputedColorScheme,
-  useMantineColorScheme,
+    Box,
+    Container,
+    Flex,
+    Paper,
+    Skeleton,
+    Text,
+    rem,
+    useMantineColorScheme,
 } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -17,7 +16,6 @@ import { GetFlag } from './GetFlag'
 import codes from './codes.json'
 
 import styles from './Weatherlist.module.css'
-import { useColorScheme } from '@mantine/hooks'
 
 interface WeatherListProp {
   searchQuery: string
