@@ -28,11 +28,11 @@ const getSearchResults = async (city: string): Promise<SearchResults[]> => {
  * @returns `WeatherResult` object
  */
 const getWeather = async (lat: number, lon: number): Promise<WeatherResult> => {
+  console.log('Coordinates sent....Requesting weather data.')
   const res = await axios.get(
     `${BASE_URL}/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
   )
 
-  console.log('Coordinates sent....Requesting weather data.')
   return res.data
 }
 
