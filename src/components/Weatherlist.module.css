@@ -2,9 +2,7 @@
   --list-border-color: #f1f3f5;
   --list-background-color: #1f1f1f;
 }
-
 .roundedEdges {
-  border: 1px solid var(--list-border-color);
   border-bottom: none;
 }
 
@@ -19,9 +17,9 @@
 }
 
 .roundedEdges:last-child {
+  border-bottom: 1px solid var(--mantine-color-default-border);
   border-bottom-left-radius: var(--mantine-radius-md);
   border-bottom-right-radius: var(--mantine-radius-md);
-  border-bottom: 1px solid var(--list-border-color);
 
   @media (max-width: $mantine-breakpoint-sm) {
     border-bottom-left-radius: 0px;
@@ -30,7 +28,7 @@
 }
 
 .topDrawer {
-  border-bottom: 1px solid var(--list-border-color);
+  border-bottom: 1px solid var(--mantine-color-default-border);
   background-color: var(--list-background-color);
   height: 12rem;
   width: 100%;
