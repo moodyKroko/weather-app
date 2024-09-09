@@ -34,6 +34,7 @@ export default function ToggleColorScheme() {
           variant="gradient"
           size={38}
           radius="md"
+          mt={4}
           gradient={currentGradient}
           aria-label="Toggle color scheme"
         >
