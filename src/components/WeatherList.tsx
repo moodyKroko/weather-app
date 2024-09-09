@@ -15,11 +15,10 @@ interface WeatherListProp {
 
 export default function WeatherList({
   searchQuery,
-  onTableRowClick,
 }: WeatherListProp) {
   const [countryNames] = useState<CountryCodes>(codes.codes)
 
-  const { isLoading, isPending, isFetching, data } = useQuery<SearchResults[]>({
+  const { isPending, isFetching, data } = useQuery<SearchResults[]>({
     queryKey: ['searchResults', searchQuery],
     queryFn: () => getSearchResults(searchQuery),
     enabled: Boolean(searchQuery),
