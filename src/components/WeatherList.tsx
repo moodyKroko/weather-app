@@ -34,7 +34,7 @@ export default function WeatherList({
   })
 
   const renderSkeletons = () => {
-    return Array.from({ length: 5 }).map((_, index) => (
+    return Array.from({ length: 2 }).map((_, index) => (
       <Skeleton key={index} height={50} mt='1rem' />
     ))
   }
