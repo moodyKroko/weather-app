@@ -1,4 +1,4 @@
-import { Box, Container, Flex, rem } from '@mantine/core'
+import { Box, Flex } from '@mantine/core'
 import { useDebouncedState } from '@mantine/hooks'
 import { useState } from 'react'
 
@@ -30,7 +30,7 @@ export default function Hero(): JSX.Element {
     <>
       <Box component="div" className={styles.topbar}></Box>
       <Flex gap="lg" direction="column">
-          <Search query={debouncedSearch} onQueryChange={handleQueryChange} />
+        <Search query={debouncedSearch} onQueryChange={handleQueryChange} />
 
         <WeatherList
           searchQuery={debouncedSearch}
