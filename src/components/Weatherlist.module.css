@@ -1,5 +1,10 @@
 .roundedEdges {
   border-bottom: none;
+  background-color: #fff;
+
+  @mixin dark {
+    background-color: var(--mantine-color-dark-8);
+  }
 }
 
 .roundedEdges:first-child {
@@ -21,12 +26,4 @@
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
   }
-}
-
-[data-mantine-color-scheme='dark'] .roundedEdges {
-  background-color: var(--mantine-color-dark-8);
-}
-
-[data-mantine-color-scheme='light'] .roundedEdges {
-  background-color: #fff;
 }
