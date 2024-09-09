@@ -1,12 +1,4 @@
-import {
-    Box,
-    Container,
-    Flex,
-    Paper,
-    Skeleton,
-    Text,
-    rem
-} from '@mantine/core'
+import { Box, Container, Flex, Paper, Skeleton, Text, rem } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { getSearchResults } from '../services/getServices'
@@ -27,23 +19,26 @@ export default function WeatherList({
 }: WeatherListProp) {
   const [countryNames] = useState<CountryCodes>(codes.codes)
 
-  const { isLoading, data } = useQuery<SearchResults[]>({
+  const { isLoading, isPending, isFetching, data } = useQuery<SearchResults[]>({
     queryKey: ['searchResults', searchQuery],
     queryFn: () => getSearchResults(searchQuery),
     enabled: Boolean(searchQuery),
+    refetchOnWindowFocus: false,
   })
 
   const renderSkeletons = () => {
     return Array.from({ length: 2 }).map((_, index) => (
-      <Skeleton key={index} height={50} mt='1rem' />
+      <Skeleton key={index} height={50} mt="1rem" />
     ))
   }
 
   console.log(data)
 
+  const ifNotQueryAndPending = searchQuery !== '' && isPending
+
   return (
     <Container size="md" w={{ base: '100%', sm: rem(715), md: rem(920) }} p="">
-      {isLoading ? (
+      {ifNotQueryAndPending ? (
         <>{renderSkeletons()}</>
       ) : (
         <Box mt="md">
@@ -67,10 +62,30 @@ export default function WeatherList({
                   gap="md"
                   wrap="wrap"
                 >
-                  <Text>{place.name},</Text>
-                  {isState ? '' : <Text>{place.state},</Text>}
-                  <Text>{country}</Text>
-                  <GetFlag countryName={place.country} />
+                  {isFetching ? (
+                    <Skeleton height={25} width="25%" />
+                  ) : (
+                    <Text>{place.name},</Text>
+                  )}
+                  {isState ? (
+                    ''
+                  ) : (
+                    <>
+                      {isFetching ? (
+                        <Skeleton height={25} width="25%" />
+                      ) : (
+                        <Text>{place.state},</Text>
+                      )}
+                    </>
+                  )}
+                  {isFetching ? (
+                    <Skeleton height={25} width="40%" />
+                  ) : (
+                    <>
+                      <Text>{country}</Text>
+                      <GetFlag countryName={place.country} />
+                    </>
+                  )}
                 </Flex>
               </Paper>
             )
