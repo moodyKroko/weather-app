@@ -30,15 +30,7 @@ export default function Hero(): JSX.Element {
     <>
       <Box
         component="div"
-        h="15rem"
-        w="100%"
-        pos="fixed"
-        top={0}
         className={styles.topbar}
-        style={{
-          borderBottom: '1px solid var(--mantine-color-default-border)',
-          zIndex: -100,
-        }}
       ></Box>
       <Flex gap="lg" direction="column">
         <Container w={{ base: rem(380), sm: rem(750), md: rem(950) }} pt={46}>

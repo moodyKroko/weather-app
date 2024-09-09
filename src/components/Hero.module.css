@@ -1,7 +1,16 @@
+.topbar {
+  z-index: -100;
+  top: 0;
+  position: fixed;
+  height: 15rem;
+  width: 100%;
+  border-bottom: 1px solid var(--mantine-color-default-border);
+}
+
 [data-mantine-color-scheme='dark'] .topbar {
   background-color: var(--mantine-color-dark-8);
 }
 
 [data-mantine-color-scheme='light'] .topbar {
-  background-color: #FFF;
+  background-color: #fff;
 }
