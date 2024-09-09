@@ -28,14 +28,11 @@ export default function Hero(): JSX.Element {
 
   return (
     <>
-      <Box
-        component="div"
-        className={styles.topbar}
-      ></Box>
+      <Box component="div" className={styles.topbar}></Box>
       <Flex gap="lg" direction="column">
-        <Container w={{ base: rem(380), sm: rem(750), md: rem(950) }} pt={46}>
+        {/* <Container w={{ base: rem(380), sm: rem(750), md: rem(950) }} pt={46}> */}
           <Search query={debouncedSearch} onQueryChange={handleQueryChange} />
-        </Container>
+        {/* </Container> */}
 
         <WeatherList
           searchQuery={debouncedSearch}
