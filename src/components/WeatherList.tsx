@@ -42,7 +42,7 @@ export default function WeatherList({
       ) : (
         <Box mt="md">
           {data?.map((place, index) => {
-            const isState = place.state === undefined
+            const haveState = place.state === undefined
             const country = countryNames[place.country.toLowerCase()]
 
             return (
@@ -66,7 +66,7 @@ export default function WeatherList({
                   ) : (
                     <Text>{place.name},</Text>
                   )}
-                  {isState ? (
+                  {haveState ? (
                     ''
                   ) : (
                     <>
