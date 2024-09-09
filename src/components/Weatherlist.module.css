@@ -26,12 +26,3 @@
     border-bottom-right-radius: 0px;
   }
 }
-
-.topDrawer {
-  border-bottom: 1px solid var(--mantine-color-default-border);
-  background-color: var(--list-background-color);
-  height: 12rem;
-  width: 100%;
-  position: absolute;
-  z-index: -1;
-}
