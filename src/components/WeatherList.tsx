@@ -40,10 +40,6 @@ export default function WeatherList({
     ))
   }
 
-  const { colorScheme } = useMantineColorScheme()
-  const containerColorChange = colorScheme === 'light' ? 'white' : '#1f1f1f'
-
-  console.log(containerColorChange)
   console.log(data)
 
   return (
