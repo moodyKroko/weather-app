@@ -2,9 +2,18 @@
   border-bottom: none;
   background-color: #fff;
 
+  @mixin hover {
+    background-color: var(--mantine-color-gray-0);
+  }
+
   @mixin dark {
     background-color: var(--mantine-color-dark-8);
+
+    @mixin hover {
+      background-color: var(--mantine-color-dark-7);
+    }
   }
+
 }
 
 .roundedEdges:first-child {
