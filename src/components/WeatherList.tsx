@@ -1,12 +1,11 @@
 import {
-  Box,
-  Container,
-  Flex,
-  Paper,
-  Skeleton,
-  Text,
-  rem,
-  useMantineColorScheme,
+    Box,
+    Container,
+    Flex,
+    Paper,
+    Skeleton,
+    Text,
+    rem
 } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
