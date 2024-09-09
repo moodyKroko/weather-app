@@ -1,4 +1,4 @@
-import { TextInput } from '@mantine/core'
+import { Container, TextInput, rem } from '@mantine/core'
 import { IconSearch } from '@tabler/icons-react'
 import React from 'react'
 
@@ -14,15 +14,17 @@ export default function Search({
   const icon = <IconSearch />
 
   return (
-    <TextInput
-      leftSectionPointerEvents="none"
-      leftSection={icon}
-      defaultValue={query}
-      onChange={onQueryChange}
-      variant="filled"
-      size="lg"
-      radius="md"
-      placeholder="Enter name of town or city"
-    />
+    <Container w={{ base: rem(380), sm: rem(750), md: rem(950) }} pt={46}>
+      <TextInput
+        leftSectionPointerEvents="none"
+        leftSection={icon}
+        defaultValue={query}
+        onChange={onQueryChange}
+        variant="filled"
+        size="lg"
+        radius="md"
+        placeholder="Enter name of town or city"
+      />
+    </Container>
   )
 }
