@@ -6,7 +6,7 @@ export default function Navbar() {
     <header>
       <Container size="md" m="auto" p="xs">
         <Flex align="center" justify="space-between" px="xs">
-          <Title order={1}>Weather Today</Title>
+          <Title order={2}>Weather Today</Title>
           <ToggleColorScheme />
         </Flex>
       </Container>
