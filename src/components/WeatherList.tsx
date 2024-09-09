@@ -47,7 +47,7 @@ export default function WeatherList({
   console.log(data)
 
   return (
-    <Container size="md" w={{ base: '100%', sm: rem(750), md: rem(920) }} p="">
+    <Container size="md" w={{ base: '100%', sm: rem(715), md: rem(920) }} p="">
       {isLoading ? (
         <>{renderSkeletons()}</>
       ) : (
