@@ -29,7 +29,6 @@ export default function Hero(): JSX.Element {
 
   return (
     <>
-      <Box component="div" bg={containerColorChange}></Box>
       <Flex gap="lg" direction="column">
         <Container w={{ base: rem(380), sm: rem(750), md: rem(950) }} pt={46}>
           <Search query={debouncedSearch} onQueryChange={handleQueryChange} />
@@ -45,6 +44,18 @@ export default function Hero(): JSX.Element {
         )}
         <br />
       </Flex>
+      <Box
+        component="div"
+        bg="red"
+        h="15rem"
+        w="100%"
+        pos="fixed"
+        top={0}
+        style={{
+          borderBottom: '1px solid var(--mantine-color-default-border)',
+          zIndex: -100,
+        }}
+      ></Box>
     </>
   )
 }
