@@ -5,8 +5,8 @@ export default function Navbar() {
   return (
     <header>
       <Container size="md" m="auto" p="xs">
-        <Flex justify="space-between" px="xs">
-          <Title order={2}>Weather App</Title>
+        <Flex align="center" justify="space-between" px="xs">
+          <Title order={1}>Weather Today</Title>
           <ToggleColorScheme />
         </Flex>
       </Container>

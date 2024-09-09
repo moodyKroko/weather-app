@@ -32,7 +32,7 @@ export default function ToggleColorScheme() {
         <ActionIcon
           onClick={toggleColorScheme}
           variant="gradient"
-          size={42}
+          size={38}
           radius="md"
           gradient={currentGradient}
           aria-label="Toggle color scheme"
@@ -40,7 +40,7 @@ export default function ToggleColorScheme() {
           {computedColorScheme === 'light' ? (
             <IconMoon size="1.5rem" stroke={1.8} />
           ) : (
-            <IconSun size="1.7rem" stroke={1.8} />
+            <IconSun size="1.5rem" stroke={1.8} />
           )}
         </ActionIcon>
       </motion.div>
