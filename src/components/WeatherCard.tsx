@@ -1,4 +1,4 @@
-import { Center, Flex, Grid, Image, Paper, Space, Text } from '@mantine/core'
+import { Center, Grid, Image, Paper, Text } from '@mantine/core'
 import { WeatherResult } from '../types'
 
 interface WeatherCardProps {
