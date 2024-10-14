@@ -10,7 +10,7 @@ import styles from './Weatherlist.module.css'
 
 interface WeatherListProp {
   searchQuery: string
-  onTableRowClick: (queryResult: SearchResults) => void
+  onRowClick: (queryResult: SearchResults) => void
 }
 
 export default function WeatherList({ searchQuery }: WeatherListProp) {

@@ -21,7 +21,7 @@ export default function Hero(): JSX.Element {
     setDebouncedSearch(event.currentTarget.value)
   }
 
-  const handleTableRowClick = (result: SearchResults) => {
+  const handleRowClick = (result: SearchResults) => {
     setIsQueryClicked(true)
     getWeather(result.lat, result.lon).then(res => setClickedQuery(res))
   }
@@ -34,7 +34,7 @@ export default function Hero(): JSX.Element {
 
         <WeatherList
           searchQuery={debouncedSearch}
-          onTableRowClick={handleTableRowClick}
+          onRowClick={handleRowClick}
         />
 
         {debouncedSearch && isQueryClicked && (
