@@ -47,7 +47,7 @@ export default function WeatherList({
       {cities ? (
         <>
           {cities.map((city, index) => {
-            const hasState = city.state === undefined
+            const hasState = city.state !== undefined
             const country = countryNames[city.country.toLowerCase()]
 
             return (
@@ -72,9 +72,7 @@ export default function WeatherList({
                   ) : (
                     <Text>{city.name},</Text>
                   )}
-                  {hasState ? (
-                    ''
-                  ) : (
+                  {hasState && (
                     <>
                       {isFetching ? (
                         <Skeleton height={25} width="25%" />
