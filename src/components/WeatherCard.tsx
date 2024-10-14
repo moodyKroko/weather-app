@@ -1,4 +1,4 @@
-import { Center, Grid, Image, Paper, Text } from '@mantine/core'
+import { Center, Container, Grid, Image, Paper, Text, rem } from '@mantine/core'
 import { WeatherResult } from '../types'
 
 interface WeatherCardProps {
@@ -23,7 +23,7 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
   const weatherIcon = `https://openweathermap.org/img/wn/${icon}@4x.png`
 
   return (
-    <>
+    <Container size="md" w={{ base: '100%', sm: rem(715), md: rem(920) }} p="">
       {/* TODO: Have weather icon */}
       {/* TODO: Change the temperature to Celcius */}
       <Grid
@@ -63,6 +63,6 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
           </Paper>
         </Grid.Col>
       </Grid>
-    </>
+    </Container >
   )
 }
