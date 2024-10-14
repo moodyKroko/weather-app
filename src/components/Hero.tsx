@@ -1,6 +1,6 @@
 import { Box, Flex } from '@mantine/core'
 import { useDebouncedState } from '@mantine/hooks'
-import { useState } from 'react'
+import { MouseEventHandler, useState } from 'react'
 
 import { getWeather } from '../services/getServices'
 import { SearchResults, WeatherResult } from '../types'
