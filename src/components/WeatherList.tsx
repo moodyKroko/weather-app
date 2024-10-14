@@ -31,7 +31,7 @@ export default function WeatherList({ searchQuery }: WeatherListProp) {
 
   const renderSkeletons = () => {
     return Array.from({ length: 2 }).map((_, index) => (
-      <Container key={index} size='md' mt={16}>
+      <Container key={index} size="md" mt={16}>
         <Skeleton height={50} />
       </Container>
     ))
