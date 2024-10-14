@@ -1,6 +1,6 @@
 import { Box, Flex } from '@mantine/core'
 import { useDebouncedState } from '@mantine/hooks'
-import { MouseEventHandler, useState } from 'react'
+import { useState } from 'react'
 
 import { getWeather } from '../services/getServices'
 import { SearchResults, WeatherResult } from '../types'
@@ -15,10 +15,11 @@ export default function Hero(): JSX.Element {
   const [debouncedSearch, setDebouncedSearch] = useDebouncedState('', 500)
 
   const [isQueryClicked, setIsQueryClicked] = useState(false)
-  const [clickedQuery, setClickedQuery] = useState<WeatherResult>()
+  const [clickedQuery, setClickedQuery] = useState<WeatherResult | undefined>()
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDebouncedSearch(event.currentTarget.value)
+    setIsQueryClicked(false)
   }
 
   const handleRowClick = (result: SearchResults) => {
@@ -37,7 +38,7 @@ export default function Hero(): JSX.Element {
           onRowClick={handleRowClick}
         />
 
-        {debouncedSearch && isQueryClicked && (
+        {isQueryClicked &&  (
           <WeatherCard weather={clickedQuery} />
         )}
         <br />
