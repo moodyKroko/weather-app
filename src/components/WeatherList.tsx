@@ -13,7 +13,10 @@ interface WeatherListProp {
   onRowClick: (queryResult: SearchResults) => void
 }
 
-export default function WeatherList({ searchQuery }: WeatherListProp) {
+export default function WeatherList({
+  searchQuery,
+  onRowClick,
+}: WeatherListProp) {
   const [countryNames] = useState<CountryCodes>(codes.codes)
 
   const {
@@ -54,6 +57,7 @@ export default function WeatherList({ searchQuery }: WeatherListProp) {
                 radius={0}
                 p="lg"
                 withBorder
+                onClick={() => onRowClick(city)}
                 className={`${styles.roundedEdges} ${index == 0 ? styles.first : ''} ${index == cities.length - 1 ? styles.last : ''}`}
               >
                 <Flex
