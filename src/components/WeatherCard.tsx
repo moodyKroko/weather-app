@@ -23,7 +23,12 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
   const weatherIcon = `https://openweathermap.org/img/wn/${icon}@4x.png`
 
   return (
-    <Container size="md" w={{ base: '100%', sm: rem(715), md: rem(920) }} p="">
+    <Container
+      size="md"
+      w={{ base: '100%', sm: rem(715), md: rem(920) }}
+      p=""
+      bg="rgba(150, 167, 176, 0.2)"
+    >
       {/* TODO: Have weather icon */}
       {/* TODO: Change the temperature to Celcius */}
       <Grid
@@ -63,6 +68,6 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
           </Paper>
         </Grid.Col>
       </Grid>
-    </Container >
+    </Container>
   )
 }

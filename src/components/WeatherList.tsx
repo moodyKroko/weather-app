@@ -6,7 +6,7 @@ import { CountryCodes, SearchResults } from '../types'
 import { GetFlag } from './GetFlag'
 import codes from './codes.json'
 
-import styles from './Weatherlist.module.css'
+import styles from './Components.module.css'
 
 interface WeatherListProp {
   searchQuery: string
