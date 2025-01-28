@@ -1,5 +1,19 @@
-import { Center, Container, Grid, Image, Paper, Text, rem } from '@mantine/core'
-import { WeatherResult } from '../types'
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Image,
+  NumberFormatter,
+  Text,
+  Title,
+  rem,
+} from '@mantine/core'
+import { CountryCodes, WeatherResult } from '../types'
+
+import { useState } from 'react'
+import styles from './Components.module.css'
+import codes from './codes.json'
 
 interface WeatherCardProps {
   weather: WeatherResult | undefined
@@ -10,7 +24,15 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
     return null
   }
 
+  const [countryNames] = useState<CountryCodes>(codes.codes)
+
   console.log('Weather result:', weather)
+
+  const convertKToC = (kelvin: number) => {
+    var tempCelsius = kelvin - 273.15
+
+    return <NumberFormatter value={tempCelsius} decimalScale={2} />
+  }
 
   const {
     name,
@@ -23,51 +45,45 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
   const weatherIcon = `https://openweathermap.org/img/wn/${icon}@4x.png`
 
   return (
-    <Container
-      size="md"
-      w={{ base: '100%', sm: rem(715), md: rem(920) }}
-      p=""
-      bg="rgba(150, 167, 176, 0.2)"
-    >
-      {/* TODO: Have weather icon */}
-      {/* TODO: Change the temperature to Celcius */}
-      <Grid
-        // justify="space-between"
-        // mx={{ base: 'sm' }}
-        gutter={{ base: 'sm', xs: 'md', md: 'xl', xl: 50 }}
-      >
-        <Grid.Col
-          // bg="cyan"
-          mb={{ base: 'sm' }}
-          span={{ base: 12, md: 12, lg: 4 }}
+    <Box>
+      <Container size="md">
+        <Container
+          className={styles.glassEffect}
+          w={{ base: '100%', sm: rem(715), md: rem(920) }}
+          p="sm"
         >
-          <Paper shadow="sm" radius="md" p="lg">
-            <Text>{name}</Text>
-            <Center>
+          {/* TODO: Have weather icon */}
+          {/* TODO: Change the temperature to Celcius */}
+          <Grid
+            // justify="space-between"
+            // mx={{ base: 'sm' }}
+            gutter={{ base: 'sm', xs: 'md', md: 'xl', xl: 50 }}
+          >
+            <Grid.Col mb={{ base: 'sm' }} span={{ base: 12, md: 12, lg: 4 }}>
               <Image
-                radius="md"
-                w={150}
                 src={weatherIcon}
                 alt={iconDescription}
+                w={{ base: rem(150), sm: rem(200) }}
               />
-            </Center>
-          </Paper>
-        </Grid.Col>
-        <Grid.Col
-          // bg="red"
-          mb={{ base: 'sm' }}
-          span={{ base: 12, md: 12, lg: 4 }}
-        >
-          <Paper shadow="sm" radius="md" p="lg">
-            <Text>Temp: {temp}K</Text>
-            <Text>Feels like: {feels_like}K</Text>
-            <Text>Humidity: {humidity}</Text>
-            <Text>Temp max: {temp_max}</Text>
-            <Text>Speed: {speed}</Text>
-            <Text>Country: {country}</Text>
-          </Paper>
-        </Grid.Col>
-      </Grid>
-    </Container>
+            </Grid.Col>
+            <Grid.Col mb={{ base: 'sm' }} span={{ base: 12, md: 12, lg: 4 }}>
+              <Box p="lg">
+                <Title order={2} fw={700} mb="sm">
+                  {name}, {countryNames[country.toLowerCase()]}
+                </Title>
+                <Text>Temp: {convertKToC(temp)}&deg;C</Text>
+                <Text>Feels like: {convertKToC(feels_like)}&deg;C</Text>
+                <Text>Humidity: {humidity}</Text>
+                <Text>Temp max: {convertKToC(temp_max)}&deg;C</Text>
+                <Text>Speed: {speed}</Text>
+                <Button variant="light" color="blue" radius="md" mt="sm">
+                  Convert
+                </Button>
+              </Box>
+            </Grid.Col>
+          </Grid>
+        </Container>
+      </Container>
+    </Box>
   )
 }

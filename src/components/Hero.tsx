@@ -9,7 +9,7 @@ import Search from './Search'
 import WeatherCard from './WeatherCard'
 import WeatherList from './WeatherList'
 
-import styles from './Hero.module.css'
+import styles from './Components.module.css'
 
 export default function Hero(): JSX.Element {
   const [debouncedSearch, setDebouncedSearch] = useDebouncedState('', 500)

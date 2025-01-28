@@ -75,8 +75,7 @@ export default function WeatherList({
                   {hasState && (
                     <>
                       {isFetching ? (
-                        <Skeleton height={25} width="25%" />
-                      ) : (
+                        <Skeleton height={25} width="25%" />) : (
                         <Text>{city.state},</Text>
                       )}
                     </>
